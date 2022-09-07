@@ -12,7 +12,7 @@ class Url extends Model
      *
      * @var string[]
      */
-    protected $fillable = [
+    protected array $fillable = [
         'id', 'long_name', 'short_name'
     ];
 
@@ -21,15 +21,7 @@ class Url extends Model
      *
      * @var string[]
      */
-    protected $hidden = [];
+    protected array $hidden = [];
 
-    protected $table = 'url';
-
-    protected function longName(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => htmlspecialchars($value),
-            set: fn ($value) => htmlspecialchars($value),
-        );
-    }
+    protected string $table = 'url';
 }

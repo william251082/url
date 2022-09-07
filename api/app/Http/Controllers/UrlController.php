@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 class UrlController extends Controller
 {
-    private string|null $connection = null;
-    private string $hostname = '';
     protected UrlShortenerServiceProvider $urlShortenerService;
 
     public function __construct(UrlShortenerServiceProvider $urlShortenerService)
@@ -25,6 +23,10 @@ class UrlController extends Controller
 
     public function createUrl(Request $request)
     {
+        $this->validate($request, [
+            'long_name' => 'required'
+        ]);
+
         $postedValue = $request->all();
         $longName = $postedValue['long_name'];
         $url = Url::create($request->all());
