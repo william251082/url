@@ -2,14 +2,30 @@
 
 <div>
     <label for="long_url">Please enter your long url: </label>
-    <input type="text" id="long_url" name="long_url">
+    <input type="text" id="long_url">
+    <div id="error"></div>
     <br><br>
 
     <button onclick="submitUrl()">Convert to a shorter url</button>
 </div>
 
 <script>
-    const submitUrl = () => {
-
+    const submitUrl = async () => {
+      const inputValue = document.getElementById('long_url').value
+      if (!inputValue) {
+        alert( "Please provide a url!" );
+      }
+      const data = {long_name: inputValue}
+      const options = {
+        method: 'POST',
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify(data)
+      };
+      try {
+        const response = await fetch('http://localhost:8080/api/url', options)
+        console.log('response', response)
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
 </script>

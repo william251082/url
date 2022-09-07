@@ -15,8 +15,8 @@ class UrlController extends Controller
 
     public function createUrl(Request $request)
     {
-        $user = Url::create($request->all());
+        $url = Url::create($request->all());
 
-        return response()->json($user, 201);
+        return response()->json($url, 201);
     }
 }
