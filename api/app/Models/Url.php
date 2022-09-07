@@ -21,4 +21,6 @@ class Url extends Model
      * @var string[]
      */
     protected $hidden = [];
+
+    protected $table = 'url';
 }

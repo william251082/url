@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('url', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->longText('long_name')->nullable();
             $table->string('short_name')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('user');
+            $table->timestamps();
         });
     }
 

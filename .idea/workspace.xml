@@ -2,33 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/app/Models/Url.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141519_create_user_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141657_create_url_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/api/.env.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/ExampleController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Models/Url.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Models/Url.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/bootstrap/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141519_create_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141519_create_user_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141657_create_url_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141657_create_url_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,6 +32,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -74,6 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1662558418317</updated>
       <workItem from="1662558419456" duration="6696000" />
+      <workItem from="1662566085119" duration="1262000" />
     </task>
     <servers />
   </component>
@@ -90,6 +87,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
