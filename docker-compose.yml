@@ -1,0 +1,44 @@
+version: "3.9"
+
+volumes:
+  db:
+    driver: local
+
+services:
+  mysql:
+    image: mysql:8.0.30
+    restart: always
+    ports:
+      - "3307:3306"
+    volumes:
+      - "db:/var/lib/mysql"
+    environment:
+      MYSQL_DATABASE: assessment
+      MYSQL_ROOT_PASSWORD: root
+
+  app:
+    build:
+      context: api
+      dockerfile: ../Dockerfile_api_app
+    volumes:
+      - "./api:/code"
+    depends_on:
+      - mysql
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile_api_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+    depends_on:
+      - app
+
+  frontend:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - "./frontend/web:/usr/share/nginx/html"

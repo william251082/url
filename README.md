@@ -1,6 +1,42 @@
-Url Shortener
+# Assessment-shorturl
+Assessment task for new developers
 
+# Installation requirements
+- composer (https://getcomposer.org/)
+- docker (https://www.docker.com/)
 
-Run to see the app:
+## Installation
+Run ```./install.sh``` for the default setup. This will create
+a lumen application (https://lumen.laravel.com/docs/9.x) and bring
+up the application
 
-url/$ `php -S localhost:8000 -t public`
+After installation:  
+- Your frontend is at localhost:80  
+You should see a page with a default title  
+- Your backend/API is at localhost:8080  
+You should see a blank page with a Lumen version displayed on the page
+
+## Description
+This assigment aims for you to implement the below user stories in a clean and structured matter.
+The default project setup aims to separate the concerns using the MVC pattern (https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller),
+by making using of an API for the model & controllers, and a frontend running clientside for the view. You are free
+to select a different structure, as long as you code it yourself.
+
+Time limit: 8 hours
+
+## Prerequisites 
+The main API should be build using PHP. You are free to use anything else to structure and create the implementation
+
+## Shorturl User Stories
+- [ ] As a customer I want to be able to submit a link and receive a shortened url back
+- [ ] As a user I want to be redirected to the original url after entering the shortened url
+- [ ] As a customer I want to be able to create an account using my e-mail address and a password
+- [ ] As a customer I want to be able to login to the system
+- [ ] As a customer I want to see all shortened urls I create while logged in
+- [ ] As a customer I want to be able to delete urls
+
+## Bonus stories
+- [ ] As a customer I want to see the raw number of times the url is requested
+- [ ] As a customer I want to see the unique number (on IP basis) of times the url is requested
+- [ ] As a customer I want, for evil purposes, to be able to enter an account wide url where 10% of all requests are redirected
+- [ ] As a customer I want to be able to specify a custom shortened url (with availability check)
