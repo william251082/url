@@ -13,6 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(UrlShortenerServiceProvider::class, function ($app) {
+            $config = ['debug' => true];
+            return new UrlShortenerServiceProvider($config);
+        });
     }
 }

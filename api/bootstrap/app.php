@@ -113,8 +113,7 @@ $app->router->group([
 });
 
 $app->middleware([
-    App\Http\Middleware\CorsMiddleware::class // Add this
-
+    App\Http\Middleware\CorsMiddleware::class
 ]);
 
 return $app;

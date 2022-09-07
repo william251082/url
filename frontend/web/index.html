@@ -3,10 +3,10 @@
 <div>
     <label for="long_url">Please enter your long url: </label>
     <input type="text" id="long_url">
-    <div id="error"></div>
     <br><br>
-
     <button onclick="submitUrl()">Convert to a shorter url</button>
+    <br><br>
+    <div id="link"></div>
 </div>
 
 <script>
@@ -19,11 +19,24 @@
       const options = {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
+        redirect: 'manual',
         body: JSON.stringify(data)
       };
       try {
-        const response = await fetch('http://localhost:8080/api/url', options)
-        console.log('response', response)
+        const rawResponse = await fetch('http://localhost:8080/api/url', options)
+        if (rawResponse.redirected) {
+          window.location.href = rawResponse.url
+        }
+        const jsonResponse = await rawResponse.json()
+        const shortName = jsonResponse['short_name']
+        const longName = jsonResponse['long_name']
+        const html = `
+            <a href="${longName}">
+                ${shortName}
+            </a>
+        `
+        const link = document.getElementById('link')
+        link.innerHTML = html
       } catch (error) {
         console.error('Error:', error);
       }

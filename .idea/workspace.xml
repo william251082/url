@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="get and post working">
+    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="cors working">
+      <change afterPath="$PROJECT_DIR$/api/app/Providers/UrlShortenerServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Models/Url.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Models/Url.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Providers/AppServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/bootstrap/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/bootstrap/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1662558418317</updated>
       <workItem from="1662558419456" duration="6696000" />
-      <workItem from="1662566085119" duration="7158000" />
+      <workItem from="1662566085119" duration="17517000" />
     </task>
     <task id="LOCAL-00001" summary="get and post working">
       <created>1662567598877</created>
@@ -75,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662567598877</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cors working">
+      <created>1662573614794</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1662573614794</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,7 +106,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
     <MESSAGE value="get and post working" />
-    <option name="LAST_COMMIT_MESSAGE" value="get and post working" />
+    <MESSAGE value="cors working" />
+    <option name="LAST_COMMIT_MESSAGE" value="cors working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
