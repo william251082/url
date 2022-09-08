@@ -178,10 +178,10 @@
         for (let [key, value] of urls) {
           if (value['short_name'] !== null) {
             const urlItem = `
-                <li>
+                <li id="url-item-${value['id']}">
                     <div style="display:flex; flex-direction:row;">
                       <div>${value['short_name']}</div>
-                      <button style="width: 5%" onclick="deleteUrl(value['id'])">Delete Url</button>
+                      <button style="width: 5%" onclick="deleteUrl(${value['id']})">Delete Url</button>
                     </div>
                 </li>
             `
@@ -189,7 +189,6 @@
             urlList.append(element)
           }
         }
-        urlList.append(urlItem)
       } catch (error) {
         console.error('Error:', error);
       }
@@ -202,7 +201,10 @@
     }
 
     const deleteUrl = (id) => {
-
+      const elementToDelete = document.getElementById(`url-item-${id}`);
+      console.log(`url-item-${id}`)
+      console.log(elementToDelete)
+      elementToDelete.remove()
     }
 
     const getCurrentUser = async () => {

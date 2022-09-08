@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="url list ui working">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="url delete ui working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/api/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1662558418317</updated>
       <workItem from="1662558419456" duration="6696000" />
-      <workItem from="1662566085119" duration="53500000" />
+      <workItem from="1662566085119" duration="54163000" />
     </task>
     <task id="LOCAL-00001" summary="get and post working">
       <created>1662567598877</created>
@@ -181,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662632090994</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="url delete ui working">
+      <created>1662636738632</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1662636738632</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +215,8 @@
     <MESSAGE value="/logout ui working" />
     <MESSAGE value="login register ui working" />
     <MESSAGE value="url list ui working" />
-    <option name="LAST_COMMIT_MESSAGE" value="url list ui working" />
+    <MESSAGE value="url delete ui working" />
+    <option name="LAST_COMMIT_MESSAGE" value="url delete ui working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
