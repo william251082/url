@@ -17,6 +17,9 @@ return new class extends Migration
             $table->increments('id');
             $table->longText('long_name')->nullable();
             $table->string('short_name')->nullable();
+            $table->string('ip')->nullable();
+            $table->integer('visit_count')->default(0);
+            $table->boolean('is_custom')->default(false);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('user');
             $table->timestamps();

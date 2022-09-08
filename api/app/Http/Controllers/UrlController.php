@@ -6,9 +6,7 @@ use App\Models\Url;
 use App\Providers\UrlShortenerServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Lumen\Http\ResponseFactory;
 
 class UrlController extends Controller
 {

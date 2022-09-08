@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="url delete ui working">
+    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="url delete api working">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cdbc4f6e-6371-4dff-a01d-b8298d1b312b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cdbc4f6e-6371-4dff-a01d-b8298d1b312b.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141657_create_url_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/database/migrations/2022_09_08_141657_create_url_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +80,7 @@
       <option name="presentableId" value="Default" />
       <updated>1662558418317</updated>
       <workItem from="1662558419456" duration="6696000" />
-      <workItem from="1662566085119" duration="54938000" />
+      <workItem from="1662566085119" duration="56604000" />
     </task>
     <task id="LOCAL-00001" summary="get and post working">
       <created>1662567598877</created>
@@ -194,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662637481086</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="url delete api working">
+      <created>1662638138944</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1662638138944</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,7 +232,8 @@
     <MESSAGE value="login register ui working" />
     <MESSAGE value="url list ui working" />
     <MESSAGE value="url delete ui working" />
-    <option name="LAST_COMMIT_MESSAGE" value="url delete ui working" />
+    <MESSAGE value="url delete api working" />
+    <option name="LAST_COMMIT_MESSAGE" value="url delete api working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
