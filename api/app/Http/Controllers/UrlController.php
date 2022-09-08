@@ -40,10 +40,10 @@ class UrlController extends Controller
         return response()->json($url, 201);
     }
 
-    public function deleteUrl($id): Response|ResponseFactory
+    public function deleteUrl($id): JsonResponse
     {
         Url::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response()->json(['Deleted Successfully'], 200);
     }
 
     private function convertToShortName(string $longName, int $idToEncode): string

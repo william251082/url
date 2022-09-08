@@ -200,11 +200,21 @@
       return div.firstChild;
     }
 
-    const deleteUrl = (id) => {
+    const deleteUrl = async (id) => {
       const elementToDelete = document.getElementById(`url-item-${id}`);
-      console.log(`url-item-${id}`)
-      console.log(elementToDelete)
       elementToDelete.remove()
+      try {
+        const options = {
+          method: 'DELETE',
+          headers: new Headers({
+            'content-type': 'application/json'
+          })
+        }
+        const rawResponse = await fetch(`http://localhost:8080/api/url/${id}`, options)
+        await rawResponse.json()
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
 
     const getCurrentUser = async () => {

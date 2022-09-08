@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('url', 'UrlController@showUrls');
     $router->post('url', 'UrlController@createUrl');
-    $router->delete('url', 'UrlController@deleteUrl');
+    $router->delete('url/{id}', 'UrlController@deleteUrl');
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
