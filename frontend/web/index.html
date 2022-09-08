@@ -2,6 +2,7 @@
 
 <nav onload="renderInputs()">
     <div id="welcome"></div>
+    <div id="logout-prompt"></div>
     <div id="login" style="display: none">
         <label for="login-email">Email:</label>
         <input type="email" id="login-email" placeholder="Enter email" name="email">
@@ -9,6 +10,7 @@
         <input type="password" id="login-password" placeholder="Enter password" name="password">
         <button onclick="login()">Login</button>
     </div>
+    <div id="login-prompt"></div>
     <br><br><br><br>
     <div id="register" style="display: none">
         <label for="email">Email:</label>
@@ -17,6 +19,7 @@
         <input type="password" id="password" placeholder="Enter password" name="password">
         <button onclick="register()">Register</button>
     </div>
+    <div id="register-prompt"></div>
 </nav>
 <br><br><br><br>
 <div>
@@ -88,11 +91,22 @@
           registerElement.style.display = 'none'
           window.currentUser = jsonResponse['user']['email']
           const html = `
-            <div>Welcome ${jsonResponse['user']['email']}!!!</div>
-            <button onclick="logout()">Logout</button>
+            <div id="welcome-prompt">
+                <div>Welcome ${jsonResponse['user']['email']}!!!</div>
+                <button onclick="logout()">Logout</button>
+            </div>
           `
           const welcome = document.getElementById('welcome')
           welcome.innerHTML = html
+          const registerPrompt = document.getElementById("register-prompt")
+          registerPrompt.style.display = 'none'
+        }
+        if (jsonResponse.message) {
+          const html = `
+            <div style="color: red">${jsonResponse.message}</div>
+          `
+          const prompt = document.getElementById('register-prompt')
+          prompt.innerHTML = html
         }
       } catch (error) {
         console.error('Error:', error);
@@ -108,6 +122,8 @@
       if (!password) {
         alert( "Please enter a password!" );
       }
+      const loginElement = document.getElementById("login")
+      const registerElement = document.getElementById("register")
       const data = {email, password}
       const options = {
         method: 'POST',
@@ -118,6 +134,28 @@
         const rawResponse = await fetch('http://localhost:8080/api/login', options)
         const jsonResponse = await rawResponse.json()
         document.cookie=`token=${jsonResponse['token']}`
+        if (jsonResponse['token']) {
+          loginElement.style.display = 'none'
+          registerElement.style.display = 'none'
+          window.currentUser = email
+          const html = `
+            <div id="welcome-prompt">
+                <div>Welcome ${email}!!!</div>
+                <button onclick="logout()">Logout</button>
+            </div>
+          `
+          const welcome = document.getElementById('welcome')
+          welcome.innerHTML = html
+          const loginPrompt = document.getElementById("login-prompt")
+          loginPrompt.style.display = 'none'
+        }
+        if (jsonResponse.message) {
+          const html = `
+            <div style="color: red">${jsonResponse.message}</div>
+          `
+          const prompt = document.getElementById('login-prompt')
+          prompt.innerHTML = html
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -161,19 +199,43 @@
       }
     }
 
+    const isTokenExpired = (token) => {
+      const decode = JSON.parse(atob(token.split('.')[1]))
+      if (decode.exp * 1000 < new Date().getTime()) {
+        return true
+      }
+      return false
+    }
+
     const logout = async () => {
       const token = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1]
-      console.log(token)
+      const loginElement = document.getElementById("login")
+      const registerElement = document.getElementById("register")
+      const welcomePromptElement = document.getElementById("welcome-prompt")
+      if (isTokenExpired(token)) {
+        window.currentUser = null
+        location.reload();
+      }
       try {
         const options = {
           method: 'POST',
           headers: new Headers({
             'content-type': 'application/json',
-            'authorization': token
+            'authorization': 'Bearer '+token
           })
         }
-        await fetch('http://localhost:8080/api/logout', options)
-        document.cookie = null
+        const rawResponse = await fetch('http://localhost:8080/api/logout', options)
+        const jsonResponse = await rawResponse.json()
+        if (jsonResponse.message) {
+          const html = `
+            <div style="color: blue">${jsonResponse.message}</div>
+          `
+          const prompt = document.getElementById('logout-prompt')
+          prompt.innerHTML = html
+          loginElement.style.display = 'block'
+          registerElement.style.display = 'block'
+          welcomePromptElement.style.display = 'none'
+        }
       } catch (error) {
         console.error('Error:', error);
       }
