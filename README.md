@@ -12,4 +12,4 @@
 - [ ] As a customer I want, for evil purposes, to be able to enter an account wide url where 10% of all requests are redirected
 - [ ] As a customer I want to be able to specify a custom shortened url (with availability check)
 
-![](api/Screenshot.png)
+![](Screenshot.png)
