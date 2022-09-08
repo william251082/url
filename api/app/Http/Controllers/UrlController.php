@@ -23,10 +23,6 @@ class UrlController extends Controller
 
     public function createUrl(Request $request)
     {
-        $this->validate($request, [
-            'long_name' => 'required'
-        ]);
-
         $postedValue = $request->all();
         $longName = $postedValue['long_name'];
         $url = Url::create($request->all());

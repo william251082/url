@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="/logout ui working">
+    <list default="true" id="6e530b4b-71c3-488c-9a50-02e89c21e7d7" name="Changes" comment="login register ui working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/UrlController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1662558418317</updated>
       <workItem from="1662558419456" duration="6696000" />
-      <workItem from="1662566085119" duration="40894000" />
+      <workItem from="1662566085119" duration="42824000" />
     </task>
     <task id="LOCAL-00001" summary="get and post working">
       <created>1662567598877</created>
@@ -139,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662604874689</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="login register ui working">
+      <created>1662623630171</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1662623630171</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +175,8 @@
     <MESSAGE value="/login working" />
     <MESSAGE value="/login ui working" />
     <MESSAGE value="/logout ui working" />
-    <option name="LAST_COMMIT_MESSAGE" value="/logout ui working" />
+    <MESSAGE value="login register ui working" />
+    <option name="LAST_COMMIT_MESSAGE" value="login register ui working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
