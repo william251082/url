@@ -73,7 +73,9 @@
       const data = {email, password}
       const options = {
         method: 'POST',
-        headers: new Headers({'content-type': 'application/json'}),
+        headers: new Headers({
+          'content-type': 'application/json'
+        }),
         body: JSON.stringify(data)
       }
       try {
@@ -81,11 +83,13 @@
         const jsonResponse = await rawResponse.json()
         const loginElement = document.getElementById("login")
         const registerElement = document.getElementById("register")
-        if (jsonResponse.message === 'CREATED') {
+        if (jsonResponse.message === 'CREATED' && jsonResponse['user']['email'] !== undefined) {
           loginElement.style.display = 'none'
           registerElement.style.display = 'none'
+          window.currentUser = jsonResponse['user']['email']
           const html = `
             <div>Welcome ${jsonResponse['user']['email']}!!!</div>
+            <button onclick="logout()">Logout</button>
           `
           const welcome = document.getElementById('welcome')
           welcome.innerHTML = html
@@ -123,7 +127,10 @@
       try {
         const options = {
           method: 'GET',
-          headers: new Headers({'content-type': 'application/json'}),
+          headers: new Headers({
+            'content-type': 'application/json',
+            'authorization': document.cookie,
+          })
         }
         const rawResponse = await fetch('http://localhost:8080/api/profile', options)
         const jsonResponse = await rawResponse.json()
@@ -135,21 +142,40 @@
     }
 
     const renderInputs = () => {
-      console.log(window.currentUser)
       const loginElement = document.getElementById("login")
       const registerElement = document.getElementById("register")
-      if (window.currentUser) {
+      const isTokenValid = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1]
+      const currentUser = window.currentUser
+      if (currentUser || isTokenValid && currentUser !== undefined) {
         loginElement.style.display = 'none'
         registerElement.style.display = 'none'
         const html = `
-            <div>Welcome ${window.currentUser}!!!</div>
-            <button>Logout</button>
+            <div>Welcome ${currentUser}!!!</div>
+            <button onclick="logout()">Logout</button>
           `
         const welcome = document.getElementById('welcome')
         welcome.innerHTML = html
       } else {
         loginElement.style.display = 'block'
         registerElement.style.display = 'block'
+      }
+    }
+
+    const logout = async () => {
+      const token = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1]
+      console.log(token)
+      try {
+        const options = {
+          method: 'POST',
+          headers: new Headers({
+            'content-type': 'application/json',
+            'authorization': token
+          })
+        }
+        await fetch('http://localhost:8080/api/logout', options)
+        document.cookie = null
+      } catch (error) {
+        console.error('Error:', error);
       }
     }
     window.onload = getCurrentUser;

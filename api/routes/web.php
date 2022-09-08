@@ -20,12 +20,13 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('url', 'UrlController@showUrls');
     $router->post('url', 'UrlController@createUrl');
+    $router->delete('url', 'UrlController@deleteUrl');
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
     $router->post('login', 'AuthController@login');
-    $router->post('logout', 'AuthController@logout');
+    $router->post('logout', 'UserController@logout');
     $router->get('profile', 'UserController@profile');
     $router->get('refresh', 'AuthController@refresh');
     $router->get('users/{id}', 'UserController@singleUser');

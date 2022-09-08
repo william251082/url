@@ -26,6 +26,12 @@ class UserController extends Controller
 
     public function profile(): JsonResponse
     {
-        return response()->json(User::first());
+        return response()->json(auth()->user());
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
     }
 }
