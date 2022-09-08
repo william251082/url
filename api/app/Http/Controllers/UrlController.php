@@ -6,6 +6,7 @@ use App\Models\Url;
 use App\Providers\UrlShortenerServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UrlController extends Controller
 {
@@ -23,10 +24,15 @@ class UrlController extends Controller
 
     public function createUrl(Request $request)
     {
+        $currentUser = Auth::user();
         $postedValue = $request->all();
         $longName = $postedValue['long_name'];
         $url = Url::create($request->all());
         $url->short_name = $this->convertToShortName($longName, $url->id);
+        if ($currentUser) {
+            $url->id = $currentUser->getAuthIdentifier();
+        }
+
         $url->save();
 
         return response()->json($url, 201);

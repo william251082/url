@@ -11,3 +11,5 @@
 - [ ] As a customer I want to see the unique number (on IP basis) of times the url is requested
 - [ ] As a customer I want, for evil purposes, to be able to enter an account wide url where 10% of all requests are redirected
 - [ ] As a customer I want to be able to specify a custom shortened url (with availability check)
+
+![](api/Screenshot.png)

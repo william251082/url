@@ -30,6 +30,8 @@
     <br><br>
     <div id="link"></div>
 </div>
+<br><br><br><br>
+<div id="url-list"></div>
 
 <script>
     const submitUrl = async () => {
@@ -201,10 +203,7 @@
 
     const isTokenExpired = (token) => {
       const decode = JSON.parse(atob(token.split('.')[1]))
-      if (decode.exp * 1000 < new Date().getTime()) {
-        return true
-      }
-      return false
+      return decode.exp * 1000 < new Date().getTime();
     }
 
     const logout = async () => {
