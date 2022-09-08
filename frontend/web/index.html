@@ -1,13 +1,14 @@
 <h1>Assessment</h1>
 
 <nav>
-    <div class="register">
+    <div id="register">
         <label for="email">Email:</label>
         <input type="email" id="email" placeholder="Enter email" name="email">
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="Enter password" name="password">
         <button onclick="register()">Register</button>
     </div>
+    <div id="welcome"></div>
 </nav>
 <br><br><br><br>
 <div>
@@ -70,11 +71,17 @@
       try {
         const rawResponse = await fetch('http://localhost:8080/api/register', options)
         const jsonResponse = await rawResponse.json()
-        console.log(jsonResponse)
+        const registerElement = document.getElementById("register")
+        if (jsonResponse.message === 'CREATED') {
+          registerElement.style.display = 'none'
+          const html = `
+            <div>Welcome ${jsonResponse['user']['email']}!!!</div>
+          `
+          const welcome = document.getElementById('welcome')
+          welcome.innerHTML = html
+        }
       } catch (error) {
         console.error('Error:', error);
       }
     }
-
-
 </script>

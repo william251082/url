@@ -5,16 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Guard;
 
 class UserController extends Controller
 {
     public function showUsers(): JsonResponse
     {
-        return response()->json(User::all());
+        return response()->json(['users' =>  User::all()], 200);
     }
 
     public function profile()
     {
         return response()->json(['user' => Auth::user()], 200);
+    }
+
+    public function singleUser($id)
+    {
+       try {
+           $user = User::findOrFail($id);
+           return response()->json(['user' => $user], 200);
+       } catch (\Exception $e) {
+           return response()->json(['message' => 'user not found!'], 404);
+       }
     }
 }
