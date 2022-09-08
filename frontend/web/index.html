@@ -30,8 +30,9 @@
     <br><br>
     <div id="link"></div>
 </div>
-<br><br><br><br>
-<div id="url-list"></div>
+<br><br>
+<div>Short Url List:</div>
+<ul id="url-list"></ul>
 
 <script>
     const submitUrl = async () => {
@@ -157,6 +158,29 @@
           `
           const prompt = document.getElementById('login-prompt')
           prompt.innerHTML = html
+        }
+        await getUrlList()
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const getUrlList = async () => {
+      const options = {
+        method: 'GET',
+        headers: new Headers({'content-type': 'application/json'})
+      }
+      try {
+        const rawResponse = await fetch('http://localhost:8080/api/url', options)
+        const jsonResponse = await rawResponse.json()
+        const urls = new Map(Object.entries(jsonResponse))
+        const urlList = document.getElementById('url-list')
+        for (let [key, value] of urls) {
+          if (value['short_name'] !== null) {
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(`${value['short_name']}`));
+            urlList.appendChild(li)
+          }
         }
       } catch (error) {
         console.error('Error:', error);
