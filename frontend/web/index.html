@@ -177,14 +177,32 @@
         const urlList = document.getElementById('url-list')
         for (let [key, value] of urls) {
           if (value['short_name'] !== null) {
-            const li = document.createElement("li");
-            li.appendChild(document.createTextNode(`${value['short_name']}`));
-            urlList.appendChild(li)
+            const urlItem = `
+                <li>
+                    <div style="display:flex; flex-direction:row;">
+                      <div>${value['short_name']}</div>
+                      <button style="width: 5%" onclick="deleteUrl(value['id'])">Delete Url</button>
+                    </div>
+                </li>
+            `
+            const element = createElementFromHTML(urlItem)
+            urlList.append(element)
           }
         }
+        urlList.append(urlItem)
       } catch (error) {
         console.error('Error:', error);
       }
+    }
+
+    const createElementFromHTML = (htmlString) => {
+      const div = document.createElement('div');
+      div.innerHTML = htmlString.trim();
+      return div.firstChild;
+    }
+
+    const deleteUrl = (id) => {
+
     }
 
     const getCurrentUser = async () => {

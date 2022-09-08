@@ -6,7 +6,9 @@ use App\Models\Url;
 use App\Providers\UrlShortenerServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Lumen\Http\ResponseFactory;
 
 class UrlController extends Controller
 {
@@ -22,7 +24,7 @@ class UrlController extends Controller
         return response()->json(Url::all());
     }
 
-    public function createUrl(Request $request)
+    public function createUrl(Request $request): JsonResponse
     {
         $currentUser = Auth::user();
         $postedValue = $request->all();
@@ -36,6 +38,12 @@ class UrlController extends Controller
         $url->save();
 
         return response()->json($url, 201);
+    }
+
+    public function deleteUrl($id): Response|ResponseFactory
+    {
+        Url::findOrFail($id)->delete();
+        return response('Deleted Successfully', 200);
     }
 
     private function convertToShortName(string $longName, int $idToEncode): string
