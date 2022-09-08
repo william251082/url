@@ -14,11 +14,6 @@ class UserController extends Controller
         return response()->json(['users' =>  User::all()], 200);
     }
 
-    public function profile()
-    {
-        return response()->json(['user' => Auth::user()], 200);
-    }
-
     public function singleUser($id)
     {
        try {
@@ -27,5 +22,10 @@ class UserController extends Controller
        } catch (\Exception $e) {
            return response()->json(['message' => 'user not found!'], 404);
        }
+    }
+
+    public function profile(): JsonResponse
+    {
+        return response()->json(User::first());
     }
 }

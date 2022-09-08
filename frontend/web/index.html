@@ -1,14 +1,22 @@
 <h1>Assessment</h1>
 
-<nav>
-    <div id="register">
+<nav onload="renderInputs()">
+    <div id="welcome"></div>
+    <div id="login" style="display: none">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" placeholder="Enter email" name="email">
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" placeholder="Enter password" name="password">
+        <button onclick="login()">Login</button>
+    </div>
+    <br><br><br><br>
+    <div id="register" style="display: none">
         <label for="email">Email:</label>
         <input type="email" id="email" placeholder="Enter email" name="email">
         <label for="password">Password:</label>
         <input type="password" id="password" placeholder="Enter password" name="password">
         <button onclick="register()">Register</button>
     </div>
-    <div id="welcome"></div>
 </nav>
 <br><br><br><br>
 <div>
@@ -67,12 +75,14 @@
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify(data)
-      };
+      }
       try {
         const rawResponse = await fetch('http://localhost:8080/api/register', options)
         const jsonResponse = await rawResponse.json()
+        const loginElement = document.getElementById("login")
         const registerElement = document.getElementById("register")
         if (jsonResponse.message === 'CREATED') {
+          loginElement.style.display = 'none'
           registerElement.style.display = 'none'
           const html = `
             <div>Welcome ${jsonResponse['user']['email']}!!!</div>
@@ -84,4 +94,63 @@
         console.error('Error:', error);
       }
     }
+
+    const login = async () => {
+      const email = document.getElementById('login-email').value
+      const password = document.getElementById('login-password').value
+      if (!email) {
+        alert( "Please enter an email!" );
+      }
+      if (!password) {
+        alert( "Please enter a password!" );
+      }
+      const data = {email, password}
+      const options = {
+        method: 'POST',
+        headers: new Headers({'content-type': 'application/json'}),
+        body: JSON.stringify(data)
+      }
+      try {
+        const rawResponse = await fetch('http://localhost:8080/api/login', options)
+        const jsonResponse = await rawResponse.json()
+        document.cookie=`token=${jsonResponse['token']}`
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const getCurrentUser = async () => {
+      try {
+        const options = {
+          method: 'GET',
+          headers: new Headers({'content-type': 'application/json'}),
+        }
+        const rawResponse = await fetch('http://localhost:8080/api/profile', options)
+        const jsonResponse = await rawResponse.json()
+        window.currentUser = jsonResponse['email']
+        await renderInputs()
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const renderInputs = () => {
+      console.log(window.currentUser)
+      const loginElement = document.getElementById("login")
+      const registerElement = document.getElementById("register")
+      if (window.currentUser) {
+        loginElement.style.display = 'none'
+        registerElement.style.display = 'none'
+        const html = `
+            <div>Welcome ${window.currentUser}!!!</div>
+            <button>Logout</button>
+          `
+        const welcome = document.getElementById('welcome')
+        welcome.innerHTML = html
+      } else {
+        loginElement.style.display = 'block'
+        registerElement.style.display = 'block'
+      }
+    }
+    window.onload = getCurrentUser;
 </script>
