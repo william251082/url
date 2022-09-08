@@ -7,6 +7,8 @@ use App\Providers\UrlShortenerServiceProvider;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use JetBrains\PhpStorm\NoReturn;
 
 class UrlController extends Controller
 {
@@ -32,6 +34,7 @@ class UrlController extends Controller
         if ($currentUser) {
             $url->id = $currentUser->getAuthIdentifier();
         }
+        $url->ip = $request->ip();
 
         $url->save();
 
@@ -42,6 +45,23 @@ class UrlController extends Controller
     {
         Url::findOrFail($id)->delete();
         return response()->json(['Deleted Successfully'], 200);
+    }
+
+    #[NoReturn]
+    public function addVisit($id): void
+    {
+        $url = Url::findOrFail($id);
+        $url->visit_count ++;
+        $url->save();
+    }
+
+    public function exploitableUrls(): JsonResponse
+    {
+        $exploitableUrls = DB::table('url')
+            ->orderBy('visit_count', 'desc')
+            ->limit(5)
+            ->get();
+        return response()->json($exploitableUrls);
     }
 
     private function convertToShortName(string $longName, int $idToEncode): string

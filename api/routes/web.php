@@ -21,6 +21,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('url', 'UrlController@showUrls');
     $router->post('url', 'UrlController@createUrl');
     $router->delete('url/{id}', 'UrlController@deleteUrl');
+    $router->post('url/{id}', 'UrlController@addVisit');
+});
+
+$router->group(['prefix' => 'secret'], function () use ($router) {
+    $router->get('url', 'UrlController@exploitableUrls');
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {

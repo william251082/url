@@ -13,7 +13,7 @@ class Url extends Model
      * @var string[]
      */
     protected array $fillable = [
-        'id', 'long_name', 'short_name'
+        'id', 'long_name', 'short_name', 'ip', 'visit_count', 'is_custom'
     ];
 
     /**

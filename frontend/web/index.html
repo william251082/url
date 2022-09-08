@@ -31,10 +31,22 @@
     <div id="link"></div>
 </div>
 <br><br>
+<div id="custom-url">
+    <label for="custom_short_url">Make your own short url here: </label>
+    <input type="text" id="custom_short_url" style="width: 200px;">
+    <button onclick="submitCustomUrl()">Use you own url</button>
+    <br><br>
+    <div id="custom_link"></div>
+</div>
+<br><br>
 <div>Short Url List:</div>
 <ul id="url-list"></ul>
+<br><br>
+<div style="color: red">Sensitive Url List (for hackers):</div>
+<ul id="ex-url-list"></ul>
 
 <script>
+    const apiHost = `http://localhost:81/`
     const submitUrl = async () => {
       const inputValue = document.getElementById('long_url').value
       if (!inputValue) {
@@ -48,19 +60,57 @@
         body: JSON.stringify(data)
       };
       try {
-        const rawResponse = await fetch('http://localhost:8080/api/url', options)
+        const rawResponse = await fetch(`${apiHost}api/url`, options)
         if (rawResponse.redirected) {
           window.location.href = rawResponse.url
         }
         const jsonResponse = await rawResponse.json()
+        const urlId = jsonResponse['id']
         const shortName = jsonResponse['short_name']
         const longName = jsonResponse['long_name']
         const html = `
-            <a href="${longName}">
+            <a href="${longName}" onclick="addVisit(${urlId})">
                 ${shortName}
             </a>
         `
         const link = document.getElementById('link')
+        link.innerHTML = html
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const submitCustomUrl = async () => {
+      const inputValue = document.getElementById('long_url').value
+      const inputCustomValue = document.getElementById('custom_short_url').value
+      if (!inputValue) {
+        alert( "Please provide a url!" );
+      }
+      if (!inputCustomValue) {
+        alert( "Please provide a custom url!" );
+      }
+      const data = {long_name: inputValue, short_name: inputCustomValue}
+      const options = {
+        method: 'POST',
+        headers: new Headers({'content-type': 'application/json'}),
+        redirect: 'manual',
+        body: JSON.stringify(data)
+      };
+      try {
+        const rawResponse = await fetch(`${apiHost}api/url`, options)
+        if (rawResponse.redirected) {
+          window.location.href = rawResponse.url
+        }
+        const jsonResponse = await rawResponse.json()
+        const urlId = jsonResponse['id']
+        const shortName = inputCustomValue
+        const longName = jsonResponse['long_name']
+        const html = `
+            <a href="${longName}" onclick="addVisit(${urlId})">
+                ${shortName}
+            </a>
+        `
+        const link = document.getElementById('custom_link')
         link.innerHTML = html
       } catch (error) {
         console.error('Error:', error);
@@ -85,7 +135,7 @@
         body: JSON.stringify(data)
       }
       try {
-        const rawResponse = await fetch('http://localhost:8080/api/register', options)
+        const rawResponse = await fetch(`${apiHost}api/register`, options)
         const jsonResponse = await rawResponse.json()
         const loginElement = document.getElementById("login")
         const registerElement = document.getElementById("register")
@@ -134,7 +184,7 @@
         body: JSON.stringify(data)
       }
       try {
-        const rawResponse = await fetch('http://localhost:8080/api/login', options)
+        const rawResponse = await fetch(`${apiHost}api/login`, options)
         const jsonResponse = await rawResponse.json()
         document.cookie=`token=${jsonResponse['token']}`
         if (jsonResponse['token']) {
@@ -160,6 +210,35 @@
           prompt.innerHTML = html
         }
         await getUrlList()
+        await getExploitableUrlList()
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const getExploitableUrlList = async () => {
+      const options = {
+        method: 'GET',
+        headers: new Headers({'content-type': 'application/json'})
+      }
+      try {
+        const rawResponse = await fetch(`${apiHost}secret/url`, options)
+        const jsonResponse = await rawResponse.json()
+        const urls = new Map(Object.entries(jsonResponse))
+        const urlList = document.getElementById('ex-url-list')
+        for (let [key, value] of urls) {
+          if (value['short_name'] !== null) {
+            const urlItem = `
+                <li id="url-item-${value['id']}">
+                    <div style="display:flex; flex-direction:row;">
+                      <div>${value['short_name']}</div>
+                    </div>
+                </li>
+            `
+            const element = createElementFromHTML(urlItem)
+            urlList.append(element)
+          }
+        }
       } catch (error) {
         console.error('Error:', error);
       }
@@ -171,7 +250,7 @@
         headers: new Headers({'content-type': 'application/json'})
       }
       try {
-        const rawResponse = await fetch('http://localhost:8080/api/url', options)
+        const rawResponse = await fetch(`${apiHost}api/url`, options)
         const jsonResponse = await rawResponse.json()
         const urls = new Map(Object.entries(jsonResponse))
         const urlList = document.getElementById('url-list')
@@ -210,7 +289,22 @@
             'content-type': 'application/json'
           })
         }
-        const rawResponse = await fetch(`http://localhost:8080/api/url/${id}`, options)
+        const rawResponse = await fetch(`${apiHost}api/url/${id}`, options)
+        await rawResponse.json()
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    const addVisit = async (id) => {
+      try {
+        const options = {
+          method: 'POST',
+          headers: new Headers({
+            'content-type': 'application/json'
+          })
+        }
+        const rawResponse = await fetch(`${apiHost}api/url/${id}`, options)
         await rawResponse.json()
       } catch (error) {
         console.error('Error:', error);
@@ -218,15 +312,20 @@
     }
 
     const getCurrentUser = async () => {
+      const token = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1]
+      if (isTokenExpired(token)) {
+        window.currentUser = null
+        location.reload();
+      }
       try {
         const options = {
           method: 'GET',
           headers: new Headers({
             'content-type': 'application/json',
-            'authorization': document.cookie,
+            'authorization': 'Bearer '+token
           })
         }
-        const rawResponse = await fetch('http://localhost:8080/api/profile', options)
+        const rawResponse = await fetch(`${apiHost}api/profile`, options)
         const jsonResponse = await rawResponse.json()
         window.currentUser = jsonResponse['email']
         await renderInputs()
@@ -264,7 +363,6 @@
       const token = document.cookie.split('; ').find((row) => row.startsWith('token='))?.split('=')[1]
       const loginElement = document.getElementById("login")
       const registerElement = document.getElementById("register")
-      const welcomePromptElement = document.getElementById("welcome-prompt")
       if (isTokenExpired(token)) {
         window.currentUser = null
         location.reload();
@@ -277,9 +375,10 @@
             'authorization': 'Bearer '+token
           })
         }
-        const rawResponse = await fetch('http://localhost:8080/api/logout', options)
+        const rawResponse = await fetch(`${apiHost}api/logout`, options)
         const jsonResponse = await rawResponse.json()
         if (jsonResponse.message) {
+          const welcomePromptElement = document.getElementById("welcome-prompt")
           const html = `
             <div style="color: blue">${jsonResponse.message}</div>
           `
