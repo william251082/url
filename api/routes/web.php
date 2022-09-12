@@ -24,6 +24,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('url/{id}', 'UrlController@addVisit');
 });
 
+$router->get('url/{id}', 'UrlController@redirectUrl');
+
 $router->group(['prefix' => 'secret'], function () use ($router) {
     $router->get('url', 'UrlController@exploitableUrls');
 });

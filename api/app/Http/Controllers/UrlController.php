@@ -24,16 +24,24 @@ class UrlController extends Controller
         return response()->json(Url::all());
     }
 
+    public function redirectUrl($id): JsonResponse
+    {
+        $url = Url::findOrFail($id);
+        header("location:".$url->long_name);
+        exit;
+    }
+
     public function createUrl(Request $request): JsonResponse
     {
+        $url = Url::create($request->all());
+        $redirectUrl = $request->getSchemeAndHttpHost().':80/url/'.$url->id;
         $currentUser = Auth::user();
         $postedValue = $request->all();
-        $longName = $postedValue['long_name'];
-        $url = Url::create($request->all());
-        $url->short_name = $this->convertToShortName($longName, $url->id);
+        $url->short_name = $redirectUrl;
         if ($currentUser) {
             $url->id = $currentUser->getAuthIdentifier();
         }
+
         $url->ip = $request->ip();
 
         $url->save();

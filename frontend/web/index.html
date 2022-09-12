@@ -46,7 +46,7 @@
 <ul id="ex-url-list"></ul>
 
 <script>
-    const apiHost = `http://localhost:81/`
+    const apiHost = `http://localhost:80/`
     const submitUrl = async () => {
       const inputValue = document.getElementById('long_url').value
       if (!inputValue) {
@@ -392,5 +392,4 @@
         console.error('Error:', error);
       }
     }
-    window.onload = getCurrentUser;
 </script>
